@@ -1,0 +1,222 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Preset Renovate partagé de l'org open-ent. Usage : \"extends\": [\"local>open-ent/.github:renovate-config\"]",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "ignorePresets": [
+    "group:monorepos"
+  ],
+  "timezone": "Europe/Paris",
+  "schedule": [
+    "on saturday"
+  ],
+  "minimumReleaseAge": "3 days",
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 0,
+  "rebaseWhen": "behind-base-branch",
+  "fetchChangeLogs": "pr",
+  "dependencyDashboardTitle": "Tableau de bord des dépendances (Renovate)",
+  "prBodyNotes": [
+    "Relire le changelog et les notes de version avant de fusionner. Les branches `-patched-dev` alimentent la prod : publier ensuite un tag `-patched` (voir `scripts/release/` d'open-ent-mods)."
+  ],
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "labels": [
+      "security",
+      "renovate"
+    ],
+    "schedule": [
+      "at any time"
+    ],
+    "minimumReleaseAge": null
+  },
+  "abandonmentThreshold": "2 years",
+  "packageRules": [
+    {
+      "description": "Versions majeures : jamais de PR spontanée, approbation explicite depuis le tableau de bord des dépendances.",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Mineures et correctifs regroupés par défaut en une seule PR hebdomadaire ; les groupes spécialisés ci-dessous prennent le dessus.",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    {
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom",
+        "react-router",
+        "react-router-dom"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "React",
+      "groupSlug": "react"
+    },
+    {
+      "matchPackageNames": [
+        "typescript",
+        "@types/**"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "TypeScript & types",
+      "groupSlug": "typescript"
+    },
+    {
+      "matchPackageNames": [
+        "eslint",
+        "eslint-*",
+        "@eslint/**",
+        "@typescript-eslint/**",
+        "typescript-eslint",
+        "prettier",
+        "prettier-*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "ESLint & Prettier",
+      "groupSlug": "lint"
+    },
+    {
+      "matchPackageNames": [
+        "vite",
+        "vitest",
+        "@vitest/**",
+        "@vitejs/**",
+        "vite-*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "Vite & Vitest",
+      "groupSlug": "vite"
+    },
+    {
+      "matchPackageNames": [
+        "com.fasterxml.jackson**"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "Jackson",
+      "groupSlug": "jackson"
+    },
+    {
+      "matchManagers": [
+        "dockerfile",
+        "docker-compose"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "Docker base images",
+      "groupSlug": "docker"
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "groupName": "GitHub Actions",
+      "groupSlug": "github-actions",
+      "pinDigests": true
+    },
+    {
+      "description": "Versions maison (forks -patched, libs @open-ent, socle entcore) : gouvernées par les tags -patched et starter/ent-core.yaml, jamais par Renovate. Une version de ces artefacts ne s'invente pas.",
+      "matchPackageNames": [
+        "org.entcore:**",
+        "org.entcore.**",
+        "fr.wseduc:**",
+        "io.edifice:**",
+        "fr.openent:**",
+        "fr.openent.**",
+        "fr.tech.openent:**",
+        "fr.cgi:**",
+        "net.atos:**",
+        "com.opendigitaleducation:**",
+        "@open-ent/**",
+        "@edifice.io/**",
+        "@edifice-wisemapping/**",
+        "@cgi-learning-hub/**",
+        "@openent/**",
+        "@passtech/**",
+        "entcore",
+        "entcore-*",
+        "ode-*"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Vert.x et Netty sont fournis à l'exécution par le launcher et le socle entcore : une version différente dans un module ne sert à rien ou casse au démarrage. Toute montée passe par une migration du socle. Couvre aussi les artefacts maison publiés sous io.vertx (mod-mongo-persistor, testtools).",
+      "matchPackageNames": [
+        "io.vertx:**",
+        "io.netty:**"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Le bytecode cible reste Java 1.8 (edifice-parent) : Mockito 5 exige Java 11. Lever ce plafond quand les modules visés passent en Java 11+.",
+      "matchPackageNames": [
+        "org.mockito:**"
+      ],
+      "allowedVersions": "<5"
+    },
+    {
+      "description": "Java 1.8 : Logback 1.4+ exige Java 11.",
+      "matchPackageNames": [
+        "ch.qos.logback:**"
+      ],
+      "allowedVersions": "<1.4"
+    },
+    {
+      "description": "Java 1.8 : JUnit 6 exige Java 17.",
+      "matchPackageNames": [
+        "org.junit.jupiter:**",
+        "org.junit.platform:**",
+        "org.junit:junit-bom"
+      ],
+      "allowedVersions": "<6"
+    },
+    {
+      "description": "PowerMock n'est plus maintenu et ne fonctionne pas avec Mockito récent : à retirer des tests plutôt qu'à monter.",
+      "matchPackageNames": [
+        "org.powermock:**"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Gestionnaires de paquets épinglés par packageManager (corepack) : changés avec la CI, pas par Renovate.",
+      "matchDepTypes": [
+        "packageManager"
+      ],
+      "enabled": false
+    }
+  ]
+}

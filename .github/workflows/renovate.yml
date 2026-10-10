@@ -1,0 +1,131 @@
+name: Renovate
+
+# Renovate auto-hébergé pour toute l'org open-ent (Dependabot non disponible).
+# Config : renovate/config.js (runner) + renovate-config.json (preset partagé).
+# Liste des dépôts : renovate/repositories.json, générée par
+# open-ent-mods/scripts/release/renovate-repos.sh.
+
+on:
+  schedule:
+    # Samedi 04:00 UTC, cohérent avec le « schedule: on saturday » du preset.
+    - cron: "0 4 * * 6"
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        description: "Mode simulation (extract, lookup, full) ; vide = PR réelles"
+        type: choice
+        options: ["", "extract", "lookup", "full"]
+        default: "full"
+      logLevel:
+        description: "Niveau de log Renovate"
+        type: choice
+        options: ["info", "debug"]
+        default: "info"
+      repositories:
+        description: "Limiter à quelques dépôts (ex. open-ent/blog,open-ent/wiki) ; vide = toute la liste"
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: renovate
+  cancel-in-progress: false
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Préparer la configuration
+        env:
+          ONLY: ${{ inputs.repositories }}
+          DRY_RUN: ${{ inputs.dryRun }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/renovate
+          if [ -n "${ONLY:-}" ]; then
+            jq --arg only "$ONLY" '($only | split(",") | map(gsub("^\\s+|\\s+$"; ""))) as $keep
+              | map(select(.repository as $r | $keep | index($r)))' \
+              renovate/repositories.json > /tmp/renovate/repositories.json
+          else
+            cp renovate/repositories.json /tmp/renovate/repositories.json
+          fi
+          chmod -R a+rwX /tmp/renovate
+          # Simulation seulement si demandée (lancement manuel) : une valeur vide
+          # passée à RENOVATE_DRY_RUN serait rejetée par Renovate.
+          if [ -n "${DRY_RUN:-}" ]; then echo "RENOVATE_DRY_RUN=$DRY_RUN" >> "$GITHUB_ENV"; fi
+          echo "Dépôts traités : $(jq length /tmp/renovate/repositories.json)"
+
+      - name: Renovate
+        uses: renovatebot/github-action@230ce922b08968d0a4f6f70f295601daff09ef1d # v46.3.7
+        with:
+          configurationFile: renovate/config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+          additional-env-list: |
+            NEXUS_USER
+            NEXUS_PASSWORD
+        env:
+          LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
+          RENOVATE_REPORT_PATH: /tmp/renovate/renovate-report.json
+          NEXUS_USER: ${{ secrets.NEXUS_USER }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+
+      # Rapport allégé (dépendances + mises à jour en attente, sans les détails
+      # internes de Renovate) publié sur open-ent.github.io pour security.html.
+      - name: Publier le rapport sur open-ent.github.io
+        if: always()
+        env:
+          PAGES_REPO: open-ent/open-ent.github.io
+          PAGES_PAT: ${{ secrets.OPEN_ENT_GITHUB_IO_TOKEN }}
+          PARTIAL: ${{ inputs.repositories }}
+        run: |
+          set -euo pipefail
+          REPORT=/tmp/renovate/renovate-report.json
+          if [ ! -s "$REPORT" ]; then
+            echo "::warning::pas de rapport Renovate produit"
+            exit 0
+          fi
+          if [ -n "${PARTIAL:-}" ]; then
+            echo "Run limité à quelques dépôts : rapport non publié"
+            exit 0
+          fi
+          if [ -z "$PAGES_PAT" ]; then
+            echo "::error::secret OPEN_ENT_GITHUB_IO_TOKEN manquant"
+            exit 1
+          fi
+
+          jq --arg at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '{
+            generated_at: $at,
+            repositories: (.repositories // {} | with_entries(.value = {
+              problems: ((.value.problems // []) | map({level: .level, message: .message})),
+              deps: [ (.value.packageFiles // {}) | to_entries[] | .key as $manager | .value[]
+                      | .packageFile as $file | (.deps // [])[]
+                      | select(.depName != null)
+                      | { manager: $manager, file: $file, name: .depName, datasource: .datasource,
+                          current: (.currentVersion // .currentValue), skip: .skipReason,
+                          updates: ((.updates // []) | map({version: .newVersion, type: .updateType})) } ]
+            }))
+          }' "$REPORT" > /tmp/renovate/report-slim.json
+          ls -lh "$REPORT" /tmp/renovate/report-slim.json
+
+          git clone --depth 1 "https://x-access-token:${PAGES_PAT}@github.com/${PAGES_REPO}.git" /tmp/pages
+          mkdir -p /tmp/pages/data
+          cp /tmp/renovate/report-slim.json /tmp/pages/data/renovate-report.json
+          cd /tmp/pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/renovate-report.json
+          if git diff --cached --quiet; then echo "Rien à publier"; exit 0; fi
+          git commit -m "chore(renovate): update renovate-report.json [skip ci]"
+          # Le dépôt est aussi écrit par generate-dashboard et uptime-status : on
+          # rejoue sur la dernière version en cas de course.
+          for i in 1 2 3 4 5; do
+            git push && exit 0
+            git pull --rebase --quiet
+          done
+          exit 1

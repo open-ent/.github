@@ -1,0 +1,703 @@
+[
+  {
+    "repository": "open-ent/actualites",
+    "baseBranchPatterns": [
+      "3.2.10-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/appointments",
+    "baseBranchPatterns": [
+      "1.6.7-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/blog",
+    "baseBranchPatterns": [
+      "5.5.12-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/cahier-de-textes",
+    "baseBranchPatterns": [
+      "4.2.4-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/calendar",
+    "baseBranchPatterns": [
+      "4.3.6-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/chat-nats",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/collaborative-editor",
+    "baseBranchPatterns": [
+      "3.4.7-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/collaborative-wall",
+    "baseBranchPatterns": [
+      "3.5.12-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/communities",
+    "baseBranchPatterns": [
+      "0.2.0-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/community",
+    "baseBranchPatterns": [
+      "2.2.5-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/companion",
+    "baseBranchPatterns": [
+      "main"
+    ]
+  },
+  {
+    "repository": "open-ent/competences",
+    "baseBranchPatterns": [
+      "2.2.4-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/content-moderation",
+    "baseBranchPatterns": [
+      "main"
+    ]
+  },
+  {
+    "repository": "open-ent/discord-bot",
+    "baseBranchPatterns": [
+      "main"
+    ]
+  },
+  {
+    "repository": "open-ent/edifice-entcore-libs",
+    "baseBranchPatterns": [
+      "6.16.8-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/edt",
+    "baseBranchPatterns": [
+      "3.2.7-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/entcore-css-lib",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/entcore-v2",
+    "baseBranchPatterns": [
+      "6.16.14-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "admin/src/main/ts/package.json",
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/esign",
+    "baseBranchPatterns": [
+      "1.1.0-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/exercizer",
+    "baseBranchPatterns": [
+      "4.4.7-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/explorer",
+    "baseBranchPatterns": [
+      "2.6.13-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/form",
+    "baseBranchPatterns": [
+      "3.1.9-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "formulaire-public/angular/package.json",
+          "formulaire/angular/package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/forum",
+    "baseBranchPatterns": [
+      "2.2.5-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/gar-connector",
+    "baseBranchPatterns": [
+      "3.2.6-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/generic-icons",
+    "baseBranchPatterns": [
+      "master"
+    ]
+  },
+  {
+    "repository": "open-ent/http-proxy",
+    "baseBranchPatterns": [
+      "3.0.0-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/infra-front",
+    "baseBranchPatterns": [
+      "4.8.17-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/lool-connector",
+    "baseBranchPatterns": [
+      "2.2.7-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "backend/package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/magneto",
+    "baseBranchPatterns": [
+      "2.10.7-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mindmap",
+    "baseBranchPatterns": [
+      "3.5.12-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mod-image-resizer",
+    "baseBranchPatterns": [
+      "3.3.1-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mod-json-schema-validator",
+    "baseBranchPatterns": [
+      "3.0.0-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mod-mongo-persistor",
+    "baseBranchPatterns": [
+      "4.1.1-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mod-pdf-generator",
+    "baseBranchPatterns": [
+      "2.1.1-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mod-postgresql",
+    "baseBranchPatterns": [
+      "2.1.1-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mod-sftp",
+    "baseBranchPatterns": [
+      "2.1.3-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mod-sms-sender",
+    "baseBranchPatterns": [
+      "master"
+    ]
+  },
+  {
+    "repository": "open-ent/mod-zip",
+    "baseBranchPatterns": [
+      "3.1.1-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/mongodb-helper",
+    "baseBranchPatterns": [
+      "3.1.1-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/moodle-connector",
+    "baseBranchPatterns": [
+      "2.3.4-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/nextcloud",
+    "baseBranchPatterns": [
+      "2.4.3-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "angularjs/package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/ode-bootstrap",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/open-ent",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/open-ent-desktop",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/open-ent-frontend"
+  },
+  {
+    "repository": "open-ent/open-ent-mods"
+  },
+  {
+    "repository": "open-ent/open-ent.github.io"
+  },
+  {
+    "repository": "open-ent/openent-frontend-framework",
+    "baseBranchPatterns": [
+      "2.5.30-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/pages",
+    "baseBranchPatterns": [
+      "2.2.5-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/pmb-connector",
+    "baseBranchPatterns": [
+      "2.2.3-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/poll",
+    "baseBranchPatterns": [
+      "2.2.5-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/portal-mui",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/presences",
+    "baseBranchPatterns": [
+      "2.2.10-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/rack",
+    "baseBranchPatterns": [
+      "3.2.10-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/rbs",
+    "baseBranchPatterns": [
+      "2.1.7-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/ressource-aggregator",
+    "baseBranchPatterns": [
+      "5.3.8-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/rss",
+    "baseBranchPatterns": [
+      "2.2.3-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/school-planner",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/schoolbook",
+    "baseBranchPatterns": [
+      "1.4.1-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/search-engine",
+    "baseBranchPatterns": [
+      "2.2.5-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/standalone",
+    "baseBranchPatterns": [
+      "main"
+    ]
+  },
+  {
+    "repository": "open-ent/starter",
+    "baseBranchPatterns": [
+      "6.16.14"
+    ]
+  },
+  {
+    "repository": "open-ent/statistics",
+    "baseBranchPatterns": [
+      "2.6.4-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/support",
+    "baseBranchPatterns": [
+      "4.1.9-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/theme-open-ent",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/timeline-generator",
+    "baseBranchPatterns": [
+      "3.4.8-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/vertx-cron-timer",
+    "baseBranchPatterns": [
+      "3.0.0-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/video",
+    "baseBranchPatterns": [
+      "0.2.0-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/vie-scolaire",
+    "baseBranchPatterns": [
+      "2.2.4-patched-dev"
+    ],
+    "packageRules": [
+      {
+        "description": "Frontend legacy Gulp/AngularJS (build Node 10) : pas de montée npm automatique.",
+        "matchManagers": [
+          "npm"
+        ],
+        "matchFileNames": [
+          "package.json"
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  {
+    "repository": "open-ent/vote",
+    "baseBranchPatterns": [
+      "1.2.0-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/web-utils-v2",
+    "baseBranchPatterns": [
+      "3.3.2-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/wiki",
+    "baseBranchPatterns": [
+      "3.6.16-patched-dev"
+    ]
+  },
+  {
+    "repository": "open-ent/wordpress-connector",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  },
+  {
+    "repository": "open-ent/workflowhub",
+    "baseBranchPatterns": [
+      "develop"
+    ]
+  }
+]
