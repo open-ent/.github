@@ -12,9 +12,9 @@ on:
   workflow_dispatch:
     inputs:
       dryRun:
-        description: "Mode simulation (extract, lookup, full) ; vide = PR réelles"
+        description: "Mode simulation (extract, lookup, full) ; « non » = branches et PR réelles"
         type: choice
-        options: ["", "extract", "lookup", "full"]
+        options: ["full", "lookup", "extract", "non"]
         default: "full"
       logLevel:
         description: "Niveau de log Renovate"
@@ -58,7 +58,7 @@ jobs:
           chmod -R a+rwX /tmp/renovate
           # Simulation seulement si demandée (lancement manuel) : une valeur vide
           # passée à RENOVATE_DRY_RUN serait rejetée par Renovate.
-          if [ -n "${DRY_RUN:-}" ]; then echo "RENOVATE_DRY_RUN=$DRY_RUN" >> "$GITHUB_ENV"; fi
+          if [ -n "${DRY_RUN:-}" ] && [ "$DRY_RUN" != "non" ]; then echo "RENOVATE_DRY_RUN=$DRY_RUN" >> "$GITHUB_ENV"; fi
           echo "Dépôts traités : $(jq length /tmp/renovate/repositories.json)"
 
       - name: Renovate
