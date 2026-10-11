@@ -1,4 +1,4 @@
-This Open-Ent organization brings together repositories provided as open source by Edifice.io and the Open-Ent NG community.  
+This Open-Ent organization brings together repositories provided as open source by PASS Technologie and the Open-Ent NG community (CGI, Worldline, Atos, Edifice, ....) .  
 
 The goal is to contribute to the Open ENT project while maintaining certain specific features redistributed as open source:  
 - Migration from JDK 8 to JDK 21  
