@@ -1,6 +1,6 @@
 ## Open ENT 
 
-This `open-ent` organization brings together repositories provided as open source by Edifice.io and the Open-Ent NG community.  
+This `open-ent` organization brings together repositories provided as open source by the Open-Ent open source community.  
 
 The goal is to contribute to the Open ENT project while maintaining certain specific features redistributed as open source:  
 - Migration from JDK 8 to JDK 21  
